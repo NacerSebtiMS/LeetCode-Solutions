@@ -15,6 +15,7 @@ class Fancy:
         self.L = []
         self.M = []
         self.A = []
+        self.mod = 10**9 + 7
 
 
     def append(self, val):
@@ -29,13 +30,13 @@ class Fancy:
 
     def addAll(self, inc):
         if len(self.A) > 0:
-            self.A[-1] += inc
+            self.A[-1] = (self.A[-1] + inc) % self.mod
         
 
     def multAll(self, m):
         if len(self.M) > 0:
             self.M[-1] *= m
-            self.A[-1] *= m
+            self.A[-1] = (m * self.A[-1]) % self.mod
 
 
     def getIndex(self, idx):
@@ -52,7 +53,7 @@ class Fancy:
             inc = self.A[-1] - self.A[idx-1] * (self.M[-1]//self.M[idx-1])
             m = self.M[-1]//self.M[idx-1]
 
-        return ( self.L[idx] * m + inc ) % (10**9 + 7)
+        return ( self.L[idx] * m + inc ) % self.mod
 
 
 # Your Fancy object will be instantiated and called as such:
